@@ -14,26 +14,23 @@ const PostIt = () => {
  	useEffect(()=>{
  		console.log('2');
  		if(picurl){
-
- 				fetch("/users/post",{
-				headers:{
-		    		"Content-Type":"application/json",
-		    		"Authorization":"Bearer " + localStorage.getItem("jwt")
+ 			fetch("/users/post",{
+			method:"post",
+			headers:{
+		    	"Content-Type":"application/json",
+		    	"Authorization":"Bearer " + localStorage.getItem("jwt")
 		    	},	
-				body:JSON.stringify({text,photo,picurl})
-				})
-
-				.then(res=>res.json())
-				.then(data => {
-					console.log(data)
-					if(data.status === "success"){
-		     			showAlert('success', 'posted  successfully!');
-		     		}
+			body:JSON.stringify({text,photo,picurl})
+			})
+			.then(res=>res.json())
+			.then(data => {
+				console.log(data)
+				if(data.status === "success"){
+		     		showAlert('success', 'posted  successfully!');
+		     	}
 		     	})
-				.catch(err =>console.log(err))
-
-			}
-			 
+			.catch(err =>console.log(err))
+		}	 
  	},[picurl])
 
 	const postData = () =>{
